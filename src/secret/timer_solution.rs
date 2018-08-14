@@ -37,6 +37,8 @@ impl Future for MyTimerFuture {
                 // FIXME: add code to tell the thread how to wake up
                 // the current future's task. This will involve
                 // changing `shared_state`.
+                shared_state.waker = Some(cx.waker().clone());
+                // END FIXME
             }
         }
 
@@ -56,6 +58,10 @@ impl Future for MyTimerFuture {
                 thread::sleep(duration);
                 // FIXME: cause the future to complete.
                 // This will involve changing `shared_state`.
+                let mut shared_state = shared_state.lock().unwrap();
+                shared_state.completed = true;
+                shared_state.waker.as_mut().unwrap().wake();
+                // END FIXME
             });
         }
 
