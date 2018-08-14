@@ -1,3 +1,5 @@
+#![allow(warnings)]
+
 use std::time::{Duration, Instant};
 use std::future::{Future, FutureObj};
 use std::marker::Unpin;
@@ -11,6 +13,30 @@ use std::task::{
     SpawnObjError,
     Wake,
 };
+
+pub struct AlmostReady {
+    ready: bool,
+    value: i32,
+}
+
+pub fn almost_ready(value: i32) -> AlmostReady {
+    AlmostReady { ready: false, value }
+}
+
+impl Future for AlmostReady {
+    type Output = i32;
+    fn poll(mut self: PinMut<Self>, cx: &mut task::Context)
+        -> Poll<Self::Output>
+    {
+        if self.ready {
+            Poll::Ready(self.value)
+        } else {
+            self.ready = true;
+            cx.waker().wake();
+            Poll::Pending
+        }
+    }
+}
 
 struct DebugWaker {
     condvar: Condvar,

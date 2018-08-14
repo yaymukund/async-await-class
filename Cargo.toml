@@ -9,3 +9,7 @@ edition = '2018'
 [[bin]]
 path = "src/timer.rs"
 name = "timer"
+
+[[bin]]
+path = "src/executor.rs"
+name = "executor"

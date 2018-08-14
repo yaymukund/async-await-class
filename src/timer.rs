@@ -8,6 +8,9 @@ use std::task::{self, Poll, Waker};
 use std::thread; // You'll want to use `spawn` and `sleep`.
 use std::time::Duration;
 
+mod secret;
+use self::secret::run_future;
+
 struct MyTimerFuture {
     sleep_duration: Duration,
     first: bool,
@@ -63,7 +66,6 @@ impl Future for MyTimerFuture {
     }
 }
 
-mod secret;
 fn main() {
     let future = MyTimerFuture {
         sleep_duration: Duration::from_secs(2),
@@ -73,5 +75,5 @@ fn main() {
             waker: None
         })),
     };
-    secret::run_future(future);
+    run_future(future);
 }
