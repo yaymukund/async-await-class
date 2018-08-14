@@ -60,10 +60,10 @@ impl Spawn for ErrorSpawn {
         -> Result<(), SpawnObjError>
     {
         panic!(
-            "listen, buddy-- yeah, you're clever and all, but following \
-            directions isn't your strong suit-- nobody said anything \
-            about spawning new tasks just yet, so hold tight or help
-            a neighbor who hasn't gotten their timer working yet.")
+            "Hey! It looks like you're trying to spawn a task as part of the \
+            timer examples. We'll learn about task spawning later, so hold on \
+            tight. If you're done, help out a neighbor! If not, then \
+            \"this is not the solution you're looking for\".")
     }
 }
 
