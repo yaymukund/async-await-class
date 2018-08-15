@@ -3,23 +3,13 @@ cargo-features=["edition"]
 [package]
 name = "async_await"
 version = "0.1.0"
-authors = ["Michael Gattozzi <mgattozzi@gmail.com>"]
+authors = ["Michael Gattozzi <mgattozzi@gmail.com>", "Taylor Cramer <cramertj@google.com>"]
 edition = '2018'
-
-[[bin]]
-path = "src/waker.rs"
-name = "waker"
 
 [[bin]]
 path = "src/timer.rs"
 name = "timer"
 
 [[bin]]
-path = "src/spawn.rs"
-name = "spawn"
-
-[[bin]]
-path = "src/tiny.rs"
-name = "tiny"
-
-[dependencies]
+path = "src/executor.rs"
+name = "executor"
