@@ -33,6 +33,9 @@ impl Executor {
         // `task::Context` from a `LocalWaker` and a `Spawn`.
         // You can get a value of type `LocalWaker` by calling
         // `local_waker_from_nonlocal` on an `Arc<W>` where `W: Wake`.
+        //
+        // To poll the future you'll need to do:
+        // `PinMut::new(future).poll(cx)` where cx is `&mut Context`
     }
 }
 
@@ -80,7 +83,7 @@ struct Task {
 
 impl Wake for Task {
     fn wake(arc_self: &Arc<Self>) {
-        // FIXME: implement `Wake` by spawning the task back onto the task queue
+        // FIXME: implement `Wake` by putting the task back onto the task queue
     }
 }
 
